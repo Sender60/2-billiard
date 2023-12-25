@@ -10,6 +10,8 @@ import { SearchContext } from '../App';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryId } from '../redux/slice/filterSlice';
 
+import axios from 'axios';
+
 const Home = () => {
   const dispatch = useDispatch();
   const categoryId = useSelector((state) => state.filter.categoryId);
@@ -20,6 +22,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { searchValue } = useContext(SearchContext);
+  const category = categoryId > 0 ? `category=${categoryId}` : '';
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -39,14 +42,16 @@ const Home = () => {
 
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(`https://64d95baee947d30a260a13b5.mockapi.io/Items?page=${currentPage}&limit=4&${search}`)
-      .then((res) => res.json())
-      .then((arr) => {
-        setItems(arr);
+    axios
+      .get(
+        `https://64d95baee947d30a260a13b5.mockapi.io/Items?page=${currentPage}&limit=4&${category}${search}`,
+      )
+      .then((res) => {
+        setItems(res.data);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, sortType, searchValue, currentPage, category]);
 
   return (
     <div className="container">
