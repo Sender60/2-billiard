@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../../redux/slice/filterSlice';
 
@@ -19,6 +19,24 @@ export default function Sort() {
     setOpen(false);
   };
 
+  const handleSortingChange = (event) => {
+    event.stopPropagation();
+    setOpen(!open);
+  };
+
+  useEffect(() => {
+    const documentClickHandler = () => {
+      setOpen(false);
+      console.log('fff');
+    };
+    if (open) {
+      document.body.addEventListener('click', documentClickHandler);
+    }
+    return () => {
+      document.body.removeEventListener('click', documentClickHandler);
+    };
+  }, [open]);
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -34,7 +52,7 @@ export default function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{sort.name}</span>
+        <span onClick={handleSortingChange}>{sort.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
