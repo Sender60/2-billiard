@@ -27,7 +27,6 @@ export default function Sort() {
   useEffect(() => {
     const documentClickHandler = () => {
       setOpen(false);
-      console.log('fff');
     };
     if (open) {
       document.body.addEventListener('click', documentClickHandler);
