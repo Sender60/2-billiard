@@ -5,22 +5,17 @@ import Sort from '../components/sort';
 import PizzaBlock from '../components/pizza-block';
 import Skeleton from '../components/pizza-block/Skeleton';
 import Pagination from '../components/pagination';
-import { SearchContext } from '../App';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryId, setCurrentPage } from '../redux/slice/filterSlice';
+import { selectFilter, setCategoryId, setCurrentPage } from '../redux/slice/filterSlice';
 
-import { fetchPizzas } from '../redux/slice/pizzaSlice';
+import { fetchPizzas, selectPizzaData } from '../redux/slice/pizzaSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filter.categoryId);
-  const sortType = useSelector((state) => state.filter.sort.sortProperty);
-  const currentPage = useSelector((state) => state.filter.currentPage);
-  const items = useSelector((state) => state.pizza.items);
-  const status = useSelector((state) => state.pizza.status);
+  const { categoryId, sortType, currentPage, searchValue } = useSelector(selectFilter);
+  const { items, status } = useSelector(selectPizzaData);
 
-  const { searchValue } = useContext(SearchContext);
   const category = categoryId > 0 ? `category=${categoryId}` : '';
   const search = searchValue ? `&search=${searchValue}` : '';
 
