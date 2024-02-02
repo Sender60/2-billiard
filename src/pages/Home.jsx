@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import Categories from '../components/сategories';
 import Sort from '../components/sort';
