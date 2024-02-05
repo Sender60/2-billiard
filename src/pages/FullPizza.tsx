@@ -6,7 +6,11 @@ const FullPizza = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [pizza, setPizza] = useState();
+  const [pizza, setPizza] = useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
 
   useEffect(() => {
     async function fetchPizza() {
@@ -23,7 +27,7 @@ const FullPizza = () => {
   }, [id]);
 
   if (!pizza) {
-    return '';
+    return <>Загрузка...</>;
   }
 
   return (
