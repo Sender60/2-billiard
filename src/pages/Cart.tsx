@@ -9,7 +9,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(selectCart);
 
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
   const onClickRemove = () => {
     dispatch(clearItems());
@@ -95,7 +95,7 @@ const Cart = () => {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item) => item.count > 0 && <CartItem key={item.id} {...item} />)}
+          {items.map((item: any) => item.count > 0 && <CartItem key={item.id} {...item} />)}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">

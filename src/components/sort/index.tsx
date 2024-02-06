@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectSort, setSort } from '../../redux/slice/filterSlice';
 
@@ -8,18 +8,23 @@ export default function Sort() {
 
   const [open, setOpen] = useState(false);
 
-  const list = [
+  type sortList = {
+    name: string;
+    sortProperty: string;
+  };
+
+  const list: sortList[] = [
     { name: 'популярности', sortProperty: 'rating' },
     { name: 'цене', sortProperty: 'price' },
     { name: 'алфавиту', sortProperty: 'title' },
   ];
 
-  const onClickListItem = (obj) => {
+  const onClickListItem = (obj: sortList) => {
     dispatch(setSort(obj));
     setOpen(false);
   };
 
-  const handleSortingChange = (event) => {
+  const handleSortingChange = (event: any) => {
     event.stopPropagation();
     setOpen(!open);
   };

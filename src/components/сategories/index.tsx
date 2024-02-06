@@ -1,6 +1,9 @@
-import React from 'react';
+type Props = {
+  value: number;
+  onChangeCategory: any;
+};
 
-export default function Categories({ value, onChangeCategory }) {
+const Categories = ({ value, onChangeCategory }: Props) => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
   return (
@@ -14,4 +17,6 @@ export default function Categories({ value, onChangeCategory }) {
       </ul>
     </div>
   );
-}
+};
+
+export default Categories;
