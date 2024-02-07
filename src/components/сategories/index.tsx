@@ -1,6 +1,6 @@
 type Props = {
   value: number;
-  onChangeCategory: any;
+  onChangeCategory: (i: number) => void;
 };
 
 const Categories = ({ value, onChangeCategory }: Props) => {

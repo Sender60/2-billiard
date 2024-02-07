@@ -24,7 +24,7 @@ export default function Sort() {
     setOpen(false);
   };
 
-  const handleSortingChange = (event: any) => {
+  const handleSortingChange = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.stopPropagation();
     setOpen(!open);
   };
