@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, selectCartItemById } from '../../redux/slice/cartSlice';
+import { CartItem, addItem, selectCartItemById } from '../../redux/slice/cartSlice';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  id: number;
+  id: string;
   title: string;
   price: number;
   imageUrl: string;
@@ -24,13 +24,14 @@ export default function PizzaBlock({ id, title, price, imageUrl, sizes, types }:
   const addedCount = cartItem ? cartItem.count : 0;
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItem = {
       id,
       title,
       price,
       imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
+      count: 0,
     };
     dispatch(addItem(item));
   };
