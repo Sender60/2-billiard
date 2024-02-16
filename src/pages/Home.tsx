@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import Categories from '../components/сategories';
 import Sort from '../components/sort';
@@ -14,15 +14,15 @@ import { useAppDispatch } from '../redux/store';
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const { categoryId, currentPage, searchValue } = useSelector(selectFilter);
+  const { categoryId, currentPage, searchValue, sort } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
 
   const category = categoryId > 0 ? `category=${categoryId}` : '';
   const search = searchValue ? `&search=${searchValue}` : '';
 
-  const onChangeCategory = (id: number) => {
+  const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
@@ -56,7 +56,7 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (

@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectSort, setSort } from '../../redux/slice/filterSlice';
+import { memo, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { SortItem, setSort } from '../../redux/slice/filterSlice';
 
-export default function Sort() {
+type Props = {
+  value: SortItem;
+};
+
+const Sort = memo(({ value }: Props) => {
   const dispatch = useDispatch();
-  const sort = useSelector(selectSort);
 
   const [open, setOpen] = useState(false);
 
@@ -56,7 +59,7 @@ export default function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={handleSortingChange}>{sort.name}</span>
+        <span onClick={handleSortingChange}>{value.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
@@ -65,7 +68,7 @@ export default function Sort() {
               <li
                 key={i}
                 onClick={() => onClickListItem(obj)}
-                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}>
+                className={value.sortProperty === obj.sortProperty ? 'active' : ''}>
                 {obj.name}
               </li>
             ))}
@@ -74,4 +77,6 @@ export default function Sort() {
       )}
     </div>
   );
-}
+});
+
+export default Sort;

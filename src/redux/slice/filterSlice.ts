@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-type SortItem = {
+export type SortItem = {
   name: string;
   sortProperty: string;
 };

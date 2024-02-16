@@ -95,7 +95,9 @@ const Cart = () => {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item: any) => item.count > 0 && <CartItemBlock key={item.id} {...item} />)}
+          {items.map((item: any) => (
+            <CartItemBlock key={item.id} {...item} />
+          ))}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">

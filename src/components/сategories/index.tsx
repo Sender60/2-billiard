@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
 type Props = {
   value: number;
   onChangeCategory: (i: number) => void;
 };
 
-const Categories = ({ value, onChangeCategory }: Props) => {
+const Categories = memo(({ value, onChangeCategory }: Props) => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
   return (
@@ -17,6 +19,6 @@ const Categories = ({ value, onChangeCategory }: Props) => {
       </ul>
     </div>
   );
-};
+});
 
 export default Categories;
