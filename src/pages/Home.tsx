@@ -1,4 +1,6 @@
 import { useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../redux/store';
 
 import Categories from '../components/сategories';
 import Sort from '../components/sort';
@@ -6,11 +8,11 @@ import PizzaBlock from '../components/pizza-block';
 import Skeleton from '../components/pizza-block/Skeleton';
 import Pagination from '../components/pagination';
 
-import { useSelector } from 'react-redux';
-import { selectFilter, setCategoryId, setCurrentPage } from '../redux/slice/filterSlice';
+import { setCategoryId, setCurrentPage } from '../redux/filter/slice';
+import { selectFilter } from '../redux/filter/selectors';
 
-import { fetchPizzas, selectPizzaData } from '../redux/slice/pizzaSlice';
-import { useAppDispatch } from '../redux/store';
+import { fetchPizzas } from '../redux/pizza/slice';
+import { selectPizzaData } from '../redux/pizza/selectors';
 
 const Home = () => {
   const dispatch = useAppDispatch();

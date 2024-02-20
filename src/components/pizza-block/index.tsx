@@ -1,8 +1,10 @@
-import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { CartItem, addItem, selectCartItemById } from '../../redux/slice/cartSlice';
 import { Link } from 'react-router-dom';
+
+import { addItem } from '../../redux/cart/slice';
+import { CartItem } from '../../redux/cart/types';
+import { selectCartItemById } from '../../redux/cart/selectors';
 
 type Props = {
   id: string;

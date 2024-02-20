@@ -1,4 +1,4 @@
-import { CartItem } from '../redux/slice/cartSlice';
+import { CartItem } from '../redux/cart/types';
 
 export const getSumTotalPrice = (items: CartItem[]) => {
   return items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
@@ -10,7 +10,7 @@ export const getCartFromLS = () => {
   const totalPrice = getSumTotalPrice(items);
 
   return {
-    items,
+    items: items as CartItem[],
     totalPrice,
   };
 };

@@ -1,6 +1,8 @@
 import { memo, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { SortItem, setSort } from '../../redux/slice/filterSlice';
+
+import { setSort } from '../../redux/filter/slice';
+import { SortItem } from '../../redux/filter/types';
 
 type Props = {
   value: SortItem;
