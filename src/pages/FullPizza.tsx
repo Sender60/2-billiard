@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const FullPizza = () => {
   const { id } = useParams();
@@ -35,6 +36,11 @@ const FullPizza = () => {
       <img src={`${pizza.imageUrl}`} alt="Пицца" />
       <h2>{pizza.title}</h2>
       <h4>{pizza.price} ₽</h4>
+      <Link to={`/`}>
+        <div className="button button--outline button--add">
+          <span>Назад</span>
+        </div>
+      </Link>
     </div>
   );
 };
