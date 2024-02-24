@@ -7,7 +7,13 @@ import Header from './components/header';
 import Home from './pages/Home';
 import React from 'react';
 
-const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'));
+import Loadable from 'react-loadable';
+
+const Cart = Loadable({
+  loader: () => import(/* webpackChunkName: "Cart" */ './pages/Cart'),
+  loading: () => <div>Загрузка корзины...</div>,
+});
+
 const NotFound = React.lazy(() => import(/* webpackChunkName: "NotFound" */ './pages/NotFound'));
 const FullPizza = React.lazy(() => import(/* webpackChunkName: "FullPizza" */ './pages/FullPizza'));
 
