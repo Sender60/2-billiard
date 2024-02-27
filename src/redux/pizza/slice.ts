@@ -12,14 +12,15 @@ type Params = {
   search: string;
   category: string;
   sortBy: string;
+  order: string;
 };
 
 export const fetchPizzas = createAsyncThunk<PizzaItem[], Params>(
   'pizza/fetchPizzasStatus',
   async (params) => {
-    const { currentPage, search, category, sortBy } = params;
+    const { currentPage, search, category, sortBy, order } = params;
     const { data } = await axios.get<PizzaItem[]>(
-      `https://64d95baee947d30a260a13b5.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}${search}`,
+      `https://64d95baee947d30a260a13b5.mockapi.io/Items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`,
     );
     return data;
   },

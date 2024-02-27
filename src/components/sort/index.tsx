@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setSort } from '../../redux/filter/slice';
+import { setOrder, setSort } from '../../redux/filter/slice';
 import { SortItem } from '../../redux/filter/types';
 
 type Props = {
@@ -16,17 +16,20 @@ const Sort = memo(({ value }: Props) => {
   type sortList = {
     name: string;
     sortProperty: string;
+    order: string;
   };
 
   const list: sortList[] = [
-    { name: 'популярности', sortProperty: 'rating' },
-    { name: 'цене', sortProperty: 'price' },
-    { name: 'алфавиту', sortProperty: 'title' },
+    { name: 'популярности', sortProperty: 'rating', order: 'asc' },
+    { name: 'цене (по возрастанию)', sortProperty: 'price', order: 'asc' },
+    { name: 'цене (по убыванию)', sortProperty: '-price', order: 'desc' },
+    { name: 'алфавиту', sortProperty: 'title', order: 'asc' },
   ];
 
   const onClickListItem = (obj: sortList) => {
     dispatch(setSort(obj));
     setOpen(false);
+    dispatch(setOrder(obj.order));
   };
 
   const handleSortingChange = (event: React.MouseEvent<HTMLSpanElement>) => {

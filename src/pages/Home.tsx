@@ -16,7 +16,7 @@ import { selectPizzaData } from '../redux/pizza/selectors';
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const { categoryId, currentPage, searchValue, sort } = useSelector(selectFilter);
+  const { categoryId, currentPage, searchValue, sort, order } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
 
   const category = categoryId > 0 ? `category=${categoryId}` : '';
@@ -46,6 +46,7 @@ const Home = () => {
   const getPizza = async () => {
     dispatch(
       fetchPizzas({
+        order,
         sortBy,
         category,
         search,
@@ -60,6 +61,7 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, searchValue, currentPage, category, sort.sortProperty]);
 
+  console.log(pizzas.length);
   return (
     <div className="container">
       <div className="content__top">

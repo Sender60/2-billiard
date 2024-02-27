@@ -8,4 +8,5 @@ export interface FilterSliceState {
   categoryId: number;
   currentPage: number;
   sort: SortItem;
+  order: string;
 }
