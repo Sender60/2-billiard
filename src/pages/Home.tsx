@@ -21,10 +21,14 @@ const Home = () => {
 
   const category = categoryId > 0 ? `category=${categoryId}` : '';
   const search = searchValue ? `&search=${searchValue}` : '';
+  const sortBy = sort.sortProperty.replace('-', '');
 
-  const onChangeCategory = useCallback((id: number) => {
-    dispatch(setCategoryId(id));
-  }, []);
+  const onChangeCategory = useCallback(
+    (id: number) => {
+      dispatch(setCategoryId(id));
+    },
+    [dispatch],
+  );
 
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
@@ -42,6 +46,7 @@ const Home = () => {
   const getPizza = async () => {
     dispatch(
       fetchPizzas({
+        sortBy,
         category,
         search,
         currentPage,
@@ -52,7 +57,8 @@ const Home = () => {
 
   useEffect(() => {
     getPizza();
-  }, [categoryId, searchValue, currentPage, category]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryId, searchValue, currentPage, category, sort.sortProperty]);
 
   return (
     <div className="container">
@@ -69,7 +75,7 @@ const Home = () => {
       ) : (
         <div className="content__items">
           {status === 'loading'
-            ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+            ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
             : pizzas}
         </div>
       )}

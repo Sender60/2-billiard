@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import styles from './search.module.scss';
 
@@ -17,11 +17,12 @@ export default function Search() {
     inputRef.current?.focus();
   };
 
-  const updateSearchValue = useCallback(
-    debounce((value: string) => {
-      dispatch(setSearchValue(value));
-    }, 350),
-    [],
+  const updateSearchValue = useMemo(
+    () =>
+      debounce((value: string) => {
+        dispatch(setSearchValue(value));
+      }, 350),
+    [dispatch],
   );
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
